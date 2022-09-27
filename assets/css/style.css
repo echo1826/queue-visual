@@ -1,0 +1,35 @@
+.container {
+    width: 80vw;
+    margin: 25px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.box {
+    display: block;
+    width: 150px;
+    height: 150px;
+    background-color: red;
+    margin: 10px;
+}
+
+.row {
+    display: flex;
+}
+
+.clicked {
+    background-color: green;
+}
+
+#btn {
+    background-color: blue;
+    margin: 20px auto;
+    width: 10%;
+    height: 50px;
+    font-size: 25px;
+    border: none;
+    color: white;
+    border-radius: 10px;
+}
