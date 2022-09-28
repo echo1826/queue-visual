@@ -1,9 +1,17 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 const container = document.querySelector(".container");
 const button = document.getElementById("btn");
 const queue = [];
 container.addEventListener("click", function (event) {
-    // console.log(this, event.target);
     const element = event.target;
     if (element.matches(".box")) {
         element.classList.add("clicked");
@@ -11,14 +19,15 @@ container.addEventListener("click", function (event) {
     }
 });
 function dequeue() {
-    console.log(queue, queue.length);
-    for (let i = 0; i < queue.length; i++) {
-        console.log(queue);
-        const element = queue.shift();
-        element.classList.remove("clicked");
-        // setTimeout(() => {
-        //     return;
-        // }, 1000);
-    }
+    return __awaiter(this, void 0, void 0, function* () {
+        const copy = queue.map((element) => element);
+        for (let i = 0; i < copy.length; i++) {
+            const element = queue.shift();
+            element.classList.remove("clicked");
+            yield new Promise((res) => {
+                setTimeout(res, 1000);
+            });
+        }
+    });
 }
 button.addEventListener("click", dequeue);
