@@ -11,19 +11,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const container = document.querySelector(".container");
 const button = document.getElementById("btn");
 const queue = [];
+let count = 1;
 container.addEventListener("click", function (event) {
     const element = event.target;
     if (element.matches(".box")) {
         element.classList.add("clicked");
+        const span = document.createElement("span");
+        span.textContent = String(count);
+        element.appendChild(span);
+        count++;
         queue.push(element);
     }
 });
 function dequeue() {
     return __awaiter(this, void 0, void 0, function* () {
         const copy = queue.map((element) => element);
+        count = 0;
         for (let i = 0; i < copy.length; i++) {
             const element = queue.shift();
             element.classList.remove("clicked");
+            element.innerHTML = "";
             yield new Promise((res) => {
                 setTimeout(res, 1000);
             });

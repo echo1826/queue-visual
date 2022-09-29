@@ -8,12 +8,17 @@
 }
 
 .box {
-    display: block;
+    display: flex;
     width: 150px;
     height: 150px;
     background-color: red;
     margin: 10px;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
 }
+
+
 
 .row {
     display: flex;
@@ -26,7 +31,7 @@
 #btn {
     background-color: blue;
     margin: 20px auto;
-    width: 10%;
+    width: 150px;
     height: 50px;
     font-size: 25px;
     border: none;
