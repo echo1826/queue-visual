@@ -8,7 +8,7 @@ container.addEventListener(
     "click",
     function (this: HTMLElement, event: MouseEvent) {
         const element = event.target as HTMLElement;
-        if (element.matches(".box")) {
+        if (element.matches(".box") && !element.classList.contains("clicked")) {
             element.classList.add("clicked");
             const span = document.createElement("span") as HTMLElement;
             span.textContent = String(count);
@@ -21,7 +21,7 @@ container.addEventListener(
 
 async function dequeue(): Promise<void> {
     const copy: HTMLElement[] = queue.map((element) => element);
-    count = 0;
+    count = 1;
     for (let i = 0; i < copy.length; i++) {
         const element = queue.shift() as HTMLElement;
         element.classList.remove("clicked");

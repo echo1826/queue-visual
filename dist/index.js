@@ -14,7 +14,7 @@ const queue = [];
 let count = 1;
 container.addEventListener("click", function (event) {
     const element = event.target;
-    if (element.matches(".box")) {
+    if (element.matches(".box") && !element.classList.contains("clicked")) {
         element.classList.add("clicked");
         const span = document.createElement("span");
         span.textContent = String(count);
@@ -26,7 +26,7 @@ container.addEventListener("click", function (event) {
 function dequeue() {
     return __awaiter(this, void 0, void 0, function* () {
         const copy = queue.map((element) => element);
-        count = 0;
+        count = 1;
         for (let i = 0; i < copy.length; i++) {
             const element = queue.shift();
             element.classList.remove("clicked");
