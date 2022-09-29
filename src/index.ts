@@ -4,9 +4,7 @@ const button = document.getElementById("btn") as HTMLButtonElement;
 const queue: HTMLElement[] = [];
 let count: number = 1;
 
-container.addEventListener(
-    "click",
-    function (this: HTMLElement, event: MouseEvent) {
+container.addEventListener("click", function (this: HTMLElement, event: MouseEvent) {
         const element = event.target as HTMLElement;
         if (element.matches(".box") && !element.classList.contains("clicked")) {
             element.classList.add("clicked");
