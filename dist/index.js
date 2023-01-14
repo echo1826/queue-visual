@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const container = document.querySelector(".container");
-const button = document.getElementById("btn");
+const dequeueButton = document.getElementById("btn");
 const destackButton = document.getElementById("destack");
 const queue = [];
 let count = 1;
@@ -24,21 +24,22 @@ container.addEventListener("click", function (event) {
         queue.push(element);
     }
 });
-function dequeue() {
+function dequeue(event) {
     return __awaiter(this, void 0, void 0, function* () {
+        event.preventDefault();
         const copy = queue.map((element) => element);
+        count = 1;
         for (let i = 0; i < copy.length; i++) {
             const element = queue.shift();
             element.classList.remove("clicked");
             element.innerHTML = "";
-            yield new Promise((res) => {
-                setTimeout(res, 1000);
-            });
+            yield new Promise(res => setTimeout(res, 1000));
         }
     });
 }
-function destack() {
+function destack(event) {
     return __awaiter(this, void 0, void 0, function* () {
+        event.preventDefault();
         const copy = queue.map((element) => element);
         for (let i = copy.length; i >= 0; i--) {
             const element = queue.pop();
@@ -48,5 +49,5 @@ function destack() {
         }
     });
 }
-button.addEventListener("click", dequeue);
+dequeueButton.addEventListener("click", dequeue);
 destackButton.addEventListener("click", destack);

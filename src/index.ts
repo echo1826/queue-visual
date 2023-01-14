@@ -1,5 +1,5 @@
 const container = document.querySelector(".container") as HTMLElement;
-const button = document.getElementById("btn") as HTMLButtonElement;
+const dequeueButton = document.getElementById("btn") as HTMLButtonElement;
 const destackButton = document.getElementById("destack") as HTMLButtonElement;
 
 const queue: HTMLElement[] = [];
@@ -18,19 +18,20 @@ container.addEventListener("click", function (this: HTMLElement, event: MouseEve
     }
 );
 
-async function dequeue(): Promise<void> {
+async function dequeue(event:Event): Promise<void> {
+    event.preventDefault();
     const copy: HTMLElement[] = queue.map((element) => element);
+    count = 1;
     for (let i = 0; i < copy.length; i++) {
         const element = queue.shift() as HTMLElement;
         element.classList.remove("clicked");
         element.innerHTML = "";
-        await new Promise((res) => {
-            setTimeout(res, 1000);
-        });
+        await new Promise(res => setTimeout(res, 1000));
     }
 }
 
-async function destack(): Promise<void> {
+async function destack(event:Event): Promise<void> {
+    event.preventDefault();
     const copy: HTMLElement[] = queue.map((element) => element);
     for(let i = copy.length; i >= 0; i--) {
         const element = queue.pop() as HTMLElement;
@@ -40,5 +41,5 @@ async function destack(): Promise<void> {
     }
 }
 
-button.addEventListener("click", dequeue);
+dequeueButton.addEventListener("click", dequeue);
 destackButton.addEventListener("click", destack);

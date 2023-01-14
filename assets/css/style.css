@@ -42,3 +42,8 @@ button {
     color: white;
     border-radius: 10px;
 }
+
+form {
+    display: flex;
+    gap: 50px;
+}
