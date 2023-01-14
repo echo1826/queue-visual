@@ -26,7 +26,7 @@ async function dequeue(event:Event): Promise<void> {
         const element = queue.shift() as HTMLElement;
         element.classList.remove("clicked");
         element.innerHTML = "";
-        await new Promise(res => setTimeout(res, 1000));
+        await new Promise(res => setTimeout(res, 1500));
     }
 }
 
@@ -37,7 +37,7 @@ async function destack(event:Event): Promise<void> {
         const element = queue.pop() as HTMLElement;
         element.classList.remove("clicked");
         element.innerHTML = "";
-        await new Promise(res => setTimeout(res, 1000));
+        await new Promise(res => setTimeout(res, 1500));
     }
 }
 

@@ -33,7 +33,7 @@ function dequeue(event) {
             const element = queue.shift();
             element.classList.remove("clicked");
             element.innerHTML = "";
-            yield new Promise(res => setTimeout(res, 1000));
+            yield new Promise(res => setTimeout(res, 1500));
         }
     });
 }
@@ -45,7 +45,7 @@ function destack(event) {
             const element = queue.pop();
             element.classList.remove("clicked");
             element.innerHTML = "";
-            yield new Promise(res => setTimeout(res, 1000));
+            yield new Promise(res => setTimeout(res, 1500));
         }
     });
 }
