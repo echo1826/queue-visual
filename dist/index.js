@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const container = document.querySelector(".container");
 const button = document.getElementById("btn");
+const destackButton = document.getElementById("destack");
 const queue = [];
 let count = 1;
 container.addEventListener("click", function (event) {
@@ -26,7 +27,6 @@ container.addEventListener("click", function (event) {
 function dequeue() {
     return __awaiter(this, void 0, void 0, function* () {
         const copy = queue.map((element) => element);
-        count = 1;
         for (let i = 0; i < copy.length; i++) {
             const element = queue.shift();
             element.classList.remove("clicked");
@@ -37,4 +37,16 @@ function dequeue() {
         }
     });
 }
+function destack() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const copy = queue.map((element) => element);
+        for (let i = copy.length; i >= 0; i--) {
+            const element = queue.pop();
+            element.classList.remove("clicked");
+            element.innerHTML = "";
+            yield new Promise(res => setTimeout(res, 1000));
+        }
+    });
+}
 button.addEventListener("click", dequeue);
+destackButton.addEventListener("click", destack);
