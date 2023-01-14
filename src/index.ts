@@ -1,16 +1,20 @@
 const container = document.querySelector(".container") as HTMLElement;
 const dequeueButton = document.getElementById("btn") as HTMLButtonElement;
 const destackButton = document.getElementById("destack") as HTMLButtonElement;
+const themeButton = document.getElementById("theme") as HTMLButtonElement;
 
 const queue: HTMLElement[] = [];
 let count: number = 1;
 
-container.addEventListener("click", function (this: HTMLElement, event: MouseEvent) {
+container.addEventListener(
+    "click",
+    function (this: HTMLElement, event: MouseEvent) {
         const element = event.target as HTMLElement;
         if (element.matches(".box") && !element.classList.contains("clicked")) {
             element.classList.add("clicked");
             const span = document.createElement("span") as HTMLElement;
             span.textContent = String(count);
+            span.style.color = "#fff";
             element.appendChild(span);
             count++;
             queue.push(element);
@@ -18,7 +22,7 @@ container.addEventListener("click", function (this: HTMLElement, event: MouseEve
     }
 );
 
-async function dequeue(event:Event): Promise<void> {
+async function dequeue(event: MouseEvent): Promise<void> {
     event.preventDefault();
     const copy: HTMLElement[] = queue.map((element) => element);
     count = 1;
@@ -26,20 +30,38 @@ async function dequeue(event:Event): Promise<void> {
         const element = queue.shift() as HTMLElement;
         element.classList.remove("clicked");
         element.innerHTML = "";
-        await new Promise(res => setTimeout(res, 1500));
+        await new Promise((res) => setTimeout(res, 1500));
     }
 }
 
-async function destack(event:Event): Promise<void> {
+async function destack(event: MouseEvent): Promise<void> {
     event.preventDefault();
     const copy: HTMLElement[] = queue.map((element) => element);
-    for(let i = copy.length; i >= 0; i--) {
+    for (let i = copy.length; i >= 0; i--) {
         const element = queue.pop() as HTMLElement;
         element.classList.remove("clicked");
         element.innerHTML = "";
-        await new Promise(res => setTimeout(res, 1500));
+        await new Promise((res) => setTimeout(res, 1500));
+    }
+}
+
+function changeTheme(event: MouseEvent): void {
+    event.preventDefault();
+    let currentTheme = themeButton.dataset.theme;
+    const h1 = document.getElementsByTagName('h1')[0] as HTMLElement;
+    if (currentTheme === "dark") {
+        document.body.style.backgroundColor = "#fff";
+        h1.style.color = "black";
+        themeButton.dataset.theme = "light";
+        themeButton.textContent = "Dark";
+    } else {
+        document.body.style.backgroundColor = "rgb(69, 59, 73)";
+        h1.style.color = "#fff";
+        themeButton.dataset.theme = "dark";
+        themeButton.textContent = "Light";
     }
 }
 
 dequeueButton.addEventListener("click", dequeue);
 destackButton.addEventListener("click", destack);
+themeButton.addEventListener("click", changeTheme);

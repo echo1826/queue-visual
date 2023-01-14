@@ -1,3 +1,7 @@
+body {
+    background-color: rgb(69, 59, 73);
+}
+
 .container {
     width: 80vw;
     margin: 25px auto;
@@ -26,7 +30,7 @@
     background-color: green;
 }
 
-button {
+.btn {
     background-color: blue;
     margin: 20px auto;
     width: 150px;
@@ -36,6 +40,8 @@ button {
     color: white;
     border-radius: 10px;
 }
+
+
 
 form {
     display: flex;

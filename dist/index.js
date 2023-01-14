@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const container = document.querySelector(".container");
 const dequeueButton = document.getElementById("btn");
 const destackButton = document.getElementById("destack");
+const themeButton = document.getElementById("theme");
 const queue = [];
 let count = 1;
 container.addEventListener("click", function (event) {
@@ -19,6 +20,7 @@ container.addEventListener("click", function (event) {
         element.classList.add("clicked");
         const span = document.createElement("span");
         span.textContent = String(count);
+        span.style.color = "#fff";
         element.appendChild(span);
         count++;
         queue.push(element);
@@ -33,7 +35,7 @@ function dequeue(event) {
             const element = queue.shift();
             element.classList.remove("clicked");
             element.innerHTML = "";
-            yield new Promise(res => setTimeout(res, 1500));
+            yield new Promise((res) => setTimeout(res, 1500));
         }
     });
 }
@@ -45,9 +47,27 @@ function destack(event) {
             const element = queue.pop();
             element.classList.remove("clicked");
             element.innerHTML = "";
-            yield new Promise(res => setTimeout(res, 1500));
+            yield new Promise((res) => setTimeout(res, 1500));
         }
     });
 }
+function changeTheme(event) {
+    event.preventDefault();
+    let currentTheme = themeButton.dataset.theme;
+    const h1 = document.getElementsByTagName('h1')[0];
+    if (currentTheme === "dark") {
+        document.body.style.backgroundColor = "#fff";
+        h1.style.color = "black";
+        themeButton.dataset.theme = "light";
+        themeButton.textContent = "Dark";
+    }
+    else {
+        document.body.style.backgroundColor = "rgb(69, 59, 73)";
+        h1.style.color = "#fff";
+        themeButton.dataset.theme = "dark";
+        themeButton.textContent = "Light";
+    }
+}
 dequeueButton.addEventListener("click", dequeue);
 destackButton.addEventListener("click", destack);
+themeButton.addEventListener("click", changeTheme);
