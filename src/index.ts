@@ -28,6 +28,7 @@ container.addEventListener(
 
 async function dequeue(event: MouseEvent): Promise<void> {
     event.preventDefault();
+    if(queue.length < 1) return;
     const copy: HTMLElement[] = queue.map((element) => element);
     count = 1;
     for (let i = 0; i < copy.length; i++) {
@@ -40,6 +41,7 @@ async function dequeue(event: MouseEvent): Promise<void> {
 
 async function destack(event: MouseEvent): Promise<void> {
     event.preventDefault();
+    if(queue.length < 1) return;
     const copy: HTMLElement[] = queue.map((element) => element);
     for (let i = copy.length; i >= 0; i--) {
         const element = queue.pop() as HTMLElement;

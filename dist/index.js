@@ -34,6 +34,8 @@ container.addEventListener("click", function (event) {
 function dequeue(event) {
     return __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
+        if (queue.length < 1)
+            return;
         const copy = queue.map((element) => element);
         count = 1;
         for (let i = 0; i < copy.length; i++) {
@@ -47,6 +49,8 @@ function dequeue(event) {
 function destack(event) {
     return __awaiter(this, void 0, void 0, function* () {
         event.preventDefault();
+        if (queue.length < 1)
+            return;
         const copy = queue.map((element) => element);
         for (let i = copy.length; i >= 0; i--) {
             const element = queue.pop();
@@ -59,8 +63,8 @@ function destack(event) {
 function changeTheme(event) {
     event.preventDefault();
     let currentTheme = themeButton.dataset.theme;
-    const h1 = document.getElementsByTagName('h1')[0];
-    const spans = document.getElementsByTagName('span');
+    const h1 = document.getElementsByTagName("h1")[0];
+    const spans = document.getElementsByTagName("span");
     if (currentTheme === "dark") {
         document.body.style.backgroundColor = "#fff";
         for (let i = 0; i < spans.length; i++) {
