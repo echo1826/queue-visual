@@ -14,7 +14,11 @@ container.addEventListener(
             element.classList.add("clicked");
             const span = document.createElement("span") as HTMLElement;
             span.textContent = String(count);
-            span.style.color = "#fff";
+            if (themeButton.dataset.theme === "dark") {
+                span.style.color = "#fff";
+            } else {
+                span.style.color = "black";
+            }
             element.appendChild(span);
             count++;
             queue.push(element);
@@ -48,14 +52,21 @@ async function destack(event: MouseEvent): Promise<void> {
 function changeTheme(event: MouseEvent): void {
     event.preventDefault();
     let currentTheme = themeButton.dataset.theme;
-    const h1 = document.getElementsByTagName('h1')[0] as HTMLElement;
+    const h1 = document.getElementsByTagName("h1")[0] as HTMLElement;
+    const spans = document.getElementsByTagName("span");
     if (currentTheme === "dark") {
         document.body.style.backgroundColor = "#fff";
+        for (let i = 0; i < spans.length; i++) {
+            spans[i].style.color = "black";
+        }
         h1.style.color = "black";
         themeButton.dataset.theme = "light";
         themeButton.textContent = "Dark";
     } else {
         document.body.style.backgroundColor = "rgb(69, 59, 73)";
+        for (let i = 0; i < spans.length; i++) {
+            spans[i].style.color = "#fff";
+        }
         h1.style.color = "#fff";
         themeButton.dataset.theme = "dark";
         themeButton.textContent = "Light";
